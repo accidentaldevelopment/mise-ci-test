@@ -10,9 +10,19 @@ runs:
           ~/.cargo/registry/index/
           ~/.cargo/registry/cache/
           ~/.cargo/git/db/
+          ~/.cargo/env
+          ~/.rustup
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
     - uses: jdx/mise-action@v3
       with:
         experimental: true
         log_level: debug
+
+    - name: Install and toolchain
+      shell: bash
+      run: |
+        # Ensure Rust toolchain is properly installed before running tests
+        mise install rust
+        # Install required components explicitly
+        mise exec rust -- rustup component add rustfmt clippy
