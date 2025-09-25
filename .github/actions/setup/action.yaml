@@ -1,0 +1,18 @@
+name: Setup
+description: Set up CI toolchain
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - uses: jdx/mise-action@v3
+      with:
+        experimental: true
+        log_level: debug

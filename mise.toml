@@ -1,0 +1,8 @@
+[tools]
+rust = { version = '1.90.0', components = 'rustfmt,clippy' }
+
+[tasks.fmt]
+run = 'cargo fmt --check'
+
+[tasks.clippy]
+run = 'cargo clippy'
